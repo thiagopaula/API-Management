@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API_Management.ViewModel;
 using Application.Interfaces;
@@ -46,7 +47,7 @@ namespace API_Management.Controllers
             {
                 var movies = await MovieAppService.FindAllAsync();
 
-                if (movies == null) return NotFound();
+                if (movies == null || !movies.Any()) return NotFound();
 
                 var moviesViewModel = Mapper.Map<List<MovieViewModel>>(movies);
 

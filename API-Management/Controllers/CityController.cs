@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API_Management.ViewModel;
 using Application.Interfaces;
@@ -47,7 +48,7 @@ namespace API_Management.Controllers
             {
                 var cities = await CityAppService.FindAllAsync();
 
-                if (cities == null) return NotFound();
+                if (cities == null || !cities.Any()) return NotFound();
 
                 var citiesViewModel = Mapper.Map<List<CityViewModel>>(cities);
 

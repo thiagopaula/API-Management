@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API_Management.ViewModel;
 using Application.Interfaces;
@@ -46,7 +47,7 @@ namespace API_Management.Controllers
             {
                 var sessions = await SessionAppService.FindAllAsync();
 
-                if (sessions == null) return NotFound();
+                if (sessions == null || !sessions.Any()) return NotFound();
 
                 var sessionsViewModel = Mapper.Map<List<SessionViewModel>>(sessions);
 
