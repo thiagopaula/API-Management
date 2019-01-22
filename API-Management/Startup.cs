@@ -3,14 +3,11 @@ using API_Management.AppConfig;
 using Application.Interfaces;
 using Application.Services;
 using Domain.Interfaces.Repositories;
-using Service.Interfaces;
 using LightInject;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MongoDB.Repositories;
 using Newtonsoft.Json;
@@ -20,18 +17,26 @@ using Swashbuckle.AspNetCore.Swagger;
 using API_Management.App_Start;
 using LightInject.Microsoft.DependencyInjection;
 using Service.Interfaces.Services;
+using GraphQL.Server;
+using GraphQL.Server.Ui.Playground;
+using GraphQL.Types;
+using API_Management.GraphQL;
+using API_Management.GraphQL.Types;
+using GraphQL;
+using GraphQL.Http;
+using Microsoft.AspNetCore.Http;
 
 namespace API_Management
 {
     public class Startup
     {
-         public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        }      
+        }
 
-       
+
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             var container = new ServiceContainer();
@@ -83,6 +88,27 @@ namespace API_Management
                 c.SwaggerDoc("v1", new Info { Title = "Management System API", Version = "v1" });
             });
 
+            services.AddSingleton<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
+
+            services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
+            services.AddSingleton<IDocumentWriter, DocumentWriter>();
+
+
+            services.AddSingleton<GraphQLQuery>();
+            services.AddSingleton<GraphQLData>();
+            services.AddSingleton<CityType>();
+            services.AddSingleton<CityInterface>();
+            services.AddSingleton<ISchema, GraphQLSchema>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddGraphQL(_ =>
+            {
+                _.EnableMetrics = true;
+                _.ExposeExceptions = true;
+            })
+            .AddUserContextBuilder(httpContext => new GraphQLUserContext { User = httpContext.User });
+
             return container.CreateServiceProvider(services);
         }
 
@@ -113,6 +139,15 @@ namespace API_Management
             app.UseMvc();
 
             AutoMapperConfig.Configure();
+
+            // add http for Schema at default url /graphql
+            app.UseGraphQL<ISchema>("/graphql");
+
+            // use graphql-playground at default url /ui/playground
+            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
+            {
+                Path = "/ui/playground"
+            });
         }
     }
 }

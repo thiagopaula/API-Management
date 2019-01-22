@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoDB", "MongoDB\MongoDB.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API-Management", "API-Management\API-Management.csproj", "{C74879AC-5DCB-46CC-9D19-3FCFF8CBC4D0}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Management.Test", "Management.Test\Management.Test.csproj", "{6DBA908D-9D63-4DF1-8E94-0AFDD1415425}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{C74879AC-5DCB-46CC-9D19-3FCFF8CBC4D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C74879AC-5DCB-46CC-9D19-3FCFF8CBC4D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C74879AC-5DCB-46CC-9D19-3FCFF8CBC4D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DBA908D-9D63-4DF1-8E94-0AFDD1415425}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DBA908D-9D63-4DF1-8E94-0AFDD1415425}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DBA908D-9D63-4DF1-8E94-0AFDD1415425}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DBA908D-9D63-4DF1-8E94-0AFDD1415425}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
