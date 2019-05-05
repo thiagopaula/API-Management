@@ -18,7 +18,7 @@ namespace Management.Test.Repositories
         public MovieUnitTests()
         {
             _database = new MongoClient("mongodb://thiago:82585632A@ds213513.mlab.com:13513/db-projeto").GetDatabase("db-projeto");
-            MovieRepository = new MovieRepository(_database);
+           // MovieRepository = new MovieRepository(_database);
         }
 
         [TestInitialize]
@@ -26,7 +26,7 @@ namespace Management.Test.Repositories
         {
             movie = new Movie
             {
-                Id = ObjectId.GenerateNewId(),
+                //Id = ObjectId.GenerateNewId(),
                 Title = "hahahaha",
                 Duration = 120,
                 Sinopsis = "juhjkhjkhjkha",

@@ -4,14 +4,14 @@ using System.Threading.Tasks;
 
 namespace Service.Interfaces.Services
 {
-    public interface ILocationService
+    public interface ILocationService 
     {
         Task Create(Location location);
         Task<Location> GetAsync(string id);
         Task<List<Location>> FindAllAsync();
         Task Delete(string id);
         Task<List<Location>> GetByTheaterId(string id);
-        Task UpdateAsync(Location location);
+        Task UpdateAsync(string id,Location location);
 
     }
 }

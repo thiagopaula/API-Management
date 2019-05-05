@@ -36,9 +36,9 @@ namespace Service.Services
             return await LocationRepository.GetByTheaterId(id);
         }
 
-        public async Task UpdateAsync(Location location)
+        public async Task UpdateAsync(string id,Location location)
         {
-            await LocationRepository.UpdateAsync(location);
+            await LocationRepository.Update(id,location);
         }
     }
 }

@@ -10,16 +10,21 @@ namespace MongoDB.Repositories
 {
     public class LocationRepository : AbstractRepository<Location>, ILocationRepository
     {
-        public LocationRepository([Inject()]IMongoDatabase _database) : base(_database, "locations") { }
+        public LocationRepository([Inject()]IMongoContext _database) : base(_database/*, "location"*/) { }
 
-        public async Task Create(Location location)
-        {
-            if (location.Id == null)
-            {
-                location.Id = ObjectId.GenerateNewId();
-            }
-            await Collection.InsertOneAsync(location);
-        }
+        //public LocationRepository()
+        //{
+
+        //}
+
+        //public async Task Create(Location location)
+        //{
+        //    if (location.Id == null)
+        //    {
+        //        location.Id = ObjectId.GenerateNewId();
+        //    }
+        //    await Collection.InsertOneAsync(location);
+        //}
 
         public async Task<List<Location>> GetByTheaterId(string id)
         {

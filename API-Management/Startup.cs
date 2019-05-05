@@ -25,6 +25,8 @@ using API_Management.GraphQL.Types;
 using GraphQL;
 using GraphQL.Http;
 using Microsoft.AspNetCore.Http;
+using Domain.Interfaces.Services;
+using Domain.Services;
 
 namespace API_Management
 {
@@ -42,21 +44,22 @@ namespace API_Management
             var container = new ServiceContainer();
             container.EnableAnnotatedPropertyInjection();
 
-            var clientCatalogo = new MongoClient(Configuration.GetSection("MongoConnection:ConnectionString").Value);
-            var databaseCatalogo = clientCatalogo.GetDatabase(Configuration.GetSection("MongoConnection:Database").Value);
-            container.RegisterInstance(databaseCatalogo);
+           // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-
+        
             //Injeção de dependência para repositórios
             container.Register(typeof(IRepository<>), typeof(AbstractRepository<>));
+            container.Register<IMongoContext, MongoContext>(new PerRequestLifeTime());
             container.Register<ICityRepository, CityRepository>(new PerRequestLifeTime());
             container.Register<ITheaterRepository, TheaterRepository>(new PerRequestLifeTime());
             container.Register<ILocationRepository, LocationRepository>(new PerRequestLifeTime());
             container.Register<IMovieRepository, MovieRepository>(new PerRequestLifeTime());
             container.Register<ISessionRepository, SessionRepository>(new PerRequestLifeTime());
+         //   container.Register<IConfigurationCollection, ConfigurationCollection>(new PerRequestLifeTime());
 
 
-            //Injeção de dependência para serviços     
+            //Injeção de dependência para serviços  
+            container.Register(typeof(IBaseService<>), typeof(BaseService<>));
             container.Register<ICityService, CityService>(new PerRequestLifeTime());
             container.Register<ITheaterService, TheaterService>(new PerRequestLifeTime());
             container.Register<ILocationService, LocationService>(new PerRequestLifeTime());
@@ -64,15 +67,16 @@ namespace API_Management
             container.Register<ISessionService, SessionService>(new PerRequestLifeTime());
 
 
-            //Injeção de dependência para aplicação      
+            //Injeção de dependência para aplicação  
+            container.Register(typeof(IBaseAppService<>), typeof(BaseAppService<>));
             container.Register<ICityAppService, CityAppService>(new PerRequestLifeTime());
             container.Register<ITheaterAppService, TheaterAppService>(new PerRequestLifeTime());
             container.Register<ILocationAppService, LocationAppService>(new PerRequestLifeTime());
             container.Register<IMovieAppService, MovieAppService>(new PerRequestLifeTime());
             container.Register<ISessionAppService, SessionAppService>(new PerRequestLifeTime());
 
-            services.AddSingleton<IConfiguration>(Configuration);
-
+           // services.AddScoped<IMongoContext, MongoContext>();
+            
             services.AddMvc(options =>
             {
                 options.Filters.Add(new GlobalExceptionFilter());

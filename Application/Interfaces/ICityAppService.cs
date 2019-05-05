@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-    public interface ICityAppService
+    public interface ICityAppService : IBaseAppService<City>
     {
-        Task Create(City city);
-        Task<City> GetAsync(string id);
-        Task<List<City>> FindAllAsync();
-        Task Delete(string id);
-        Task UpdateAsync(City city);
+        //Task Create(City city);
+        //Task<City> GetAsync(string id);
+        //Task<List<City>> FindAllAsync();
+        //Task Delete(string id);
+        //Task UpdateAsync(City city);
     }
 }

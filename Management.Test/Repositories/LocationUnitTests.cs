@@ -18,7 +18,7 @@ namespace Management.Test.Repositories
         public LocationUnitTests()
         {
             _database = new MongoClient("mongodb://thiago:82585632A@ds213513.mlab.com:13513/db-projeto").GetDatabase("db-projeto");
-            LocationRepository = new LocationRepository(_database);
+           // LocationRepository = new LocationRepository(_database);
         }
 
         [TestInitialize]
@@ -26,7 +26,7 @@ namespace Management.Test.Repositories
         {
             location = new Location
             {
-                Id = ObjectId.GenerateNewId(),
+                //Id = ObjectId.GenerateNewId(),
                 Name = "Cinemark Botafogo",
                 ResumeName = "Sala 10",
                 TheaterId = "5c46631b733f4719b4d4a1bb",

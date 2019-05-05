@@ -1,40 +1,51 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces.Repositories;
+using Domain.Services;
 using LightInject;
 using Service.Interfaces.Services;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using System;
 
 namespace Service.Services
 {
-    public class CityService : ICityService
+    public class CityService : BaseService<City>, ICityService
     {
-        [Inject]
-        public ICityRepository CityRepository { get; set; }
+        //[Inject]
+        //public ICityRepository CityRepository { get; set; }
 
-        public async Task Create(City city)
-        {
-            await CityRepository.Create(city);
-        }
+        //public IServiceProvider ServiceProvider { get; set; }
 
-        public async Task<City> GetAsync(string id)
-        {
-            return await CityRepository.GetAsync(id);
-        }
 
-        public async Task<List<City>> FindAllAsync()
-        {
-            return await CityRepository.FindAllAsync();
-        }
+        //public CityService(ICityRepository cityRepository)
+        //{
+        //    CityRepository = cityRepository;
+        //}
 
-        public async Task Delete(string id)
-        {
-            await CityRepository.Delete(id);
-        }
+        //[Inject]
+        //public ICityRepository CityRepository { get; set; }
 
-        public async Task UpdateAsync(City city)
-        {
-            await CityRepository.UpdateAsync(city);
-        }
+        //public async Task Create(City city)
+        //{
+        //    await CityRepository.Create(city);
+        //}
+
+        //public async Task<City> GetAsync(string id)
+        //{
+        //    return await CityRepository.GetAsync(id);
+        //}
+
+        //public async Task<List<City>> FindAllAsync()
+        //{
+        //    return await CityRepository.FindAllAsync();
+        //}
+
+        //public async Task Delete(string id)
+        //{
+        //    await CityRepository.Delete(id);
+        //}
+
+        //public async Task UpdateAsync(City city)
+        //{
+        //    await CityRepository.UpdateAsync(city);
+        //}
     }
 }

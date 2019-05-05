@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using API_Management.ViewModel;
 using Application.Interfaces;
 using AutoMapper;
-using Domain.Entities;
 using LightInject;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,26 +19,26 @@ namespace API_Management.Controllers
         [Inject]
         public ICityAppService CityAppService { get; set; }
 
-        [HttpPost("")]
-        public async Task<IActionResult> Create([FromBody] CityCreateViewModel newCity)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var city = Mapper.Map<City>(newCity);
-                    await CityAppService.Create(city);
+        //[HttpPost("")]
+        //public async Task<IActionResult> Create([FromBody] CityCreateViewModel newCity)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            var city = Mapper.Map<City>(newCity);
+        //           // await CityAppService.Create(city);
 
-                    return Ok();
-                }
-                catch (Exception ex)
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-                }
-            }
+        //            return Ok();
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        //        }
+        //    }
 
-            return BadRequest(ModelState);
-        }
+        //    return BadRequest(ModelState);
+        //}
 
         [HttpGet("")]
         public async Task<IActionResult> GetAllAsync()
@@ -96,7 +95,7 @@ namespace API_Management.Controllers
                     city.UF = updatedCity.UF;
                     city.TimeZone = updatedCity.TimeZone;
                     city.Enabled = updatedCity.Enabled;
-                    await CityAppService.UpdateAsync(city);
+                  //  await CityAppService.UpdateAsync(city);
 
                     return Ok();
                 }

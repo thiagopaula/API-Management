@@ -34,7 +34,7 @@ namespace Application.Services
 
         public async Task UpdateAsync(Location location)
         {
-            await LocationService.UpdateAsync(location);
+            await LocationService.UpdateAsync(location.Id, location);
         }
     }
 }

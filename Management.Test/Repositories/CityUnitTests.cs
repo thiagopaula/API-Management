@@ -19,7 +19,7 @@ namespace Management.Test.Repositories
         public CityUnitTests()
         {
             _database = new MongoClient("mongodb://thiago:82585632A@ds213513.mlab.com:13513/db-projeto").GetDatabase("db-projeto");
-            CityRepository = new CityRepository(_database);
+          //  CityRepository = new CityRepository(_database);
         }
 
         [TestInitialize]
@@ -27,7 +27,7 @@ namespace Management.Test.Repositories
         {
             city = new City
             {
-                Id = ObjectId.GenerateNewId(),
+               // Id = ObjectId.GenerateNewId(),
                 Name = "hahahaha",
                 TimeZone = "America/Sao_Paulo",                
                 State = "Rio de Janeiro",

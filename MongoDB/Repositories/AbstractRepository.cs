@@ -1,30 +1,34 @@
-﻿using Domain.Interfaces.Repositories;
-using MongoDB.Bson;
+﻿using Domain.Entities;
+using Domain.Interfaces.Repositories;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MongoDB.Repositories
 {
-    public abstract class AbstractRepository<T> : IRepository<T> where T : class
+    public class AbstractRepository<T> : IRepository<T> where T : class
     {
-        protected IMongoCollection<T> Collection;
-        protected IMongoCollection<T> CollectionSearch;
-        protected IMongoDatabase Database;
+        protected readonly IMongoContext Context;
+        protected readonly IMongoCollection<T> Collection;
 
-        public AbstractRepository(IMongoDatabase database, string collection)
+        public AbstractRepository(IMongoContext context)
         {
-            Database = database;
-            Collection = database.GetCollection<T>(collection);
+            Context = context;
+            Collection = Context.GetCollection<T>();
+        }
+
+        public async Task Create(T model)
+        {
+            await Collection.InsertOneAsync(model);
         }
 
         public async Task<T> GetAsync(string id)
         {
 
-            if (!ObjectId.TryParse(id, out ObjectId internalId))
-                return null;
+            //if (!ObjectId.TryParse(id, out ObjectId internalId))
+            //    return null;
 
-            var filter = Builders<T>.Filter.Eq("_id", new ObjectId(id));
+            var filter = Builders<T>.Filter.Eq("_id", id);
 
             return await Collection.Find(filter).FirstOrDefaultAsync();
         }
@@ -34,13 +38,19 @@ namespace MongoDB.Repositories
             return await Collection.Find(Builders<T>.Filter.Empty).ToListAsync();
         }
 
+        public async Task Update(string id, T obj)
+        {
+            var filter = Builders<T>.Filter.Eq("Id", id);
+            await Collection.ReplaceOneAsync(filter, obj);
+        }
+
         public async Task Delete(string id)
         {
-            if (ObjectId.TryParse(id, out ObjectId internalId))
-            {
-                var filter = Builders<T>.Filter.Eq("_id", new ObjectId(id));
+            //if (ObjectId.TryParse(id, out ObjectId internalId))
+            //{
+                var filter = Builders<T>.Filter.Eq("_id", id);
                 await Collection.DeleteOneAsync(filter);
-            }
+           // }
         }
     }
 }

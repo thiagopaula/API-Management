@@ -6,8 +6,8 @@ namespace Domain.Interfaces.Repositories
 {
     public interface ILocationRepository : IRepository<Location>
     {
-        Task Create(Location location);
+        //Task Create(Location location);
         Task<List<Location>> GetByTheaterId(string id);
-        Task UpdateAsync(Location location);
+        //Task UpdateAsync(Location location);
     }
 }

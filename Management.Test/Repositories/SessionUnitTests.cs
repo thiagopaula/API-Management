@@ -19,7 +19,7 @@ namespace Management.Test.Repositories
         public SessionUnitTests()
         {
             _database = new MongoClient("mongodb://thiago:82585632A@ds213513.mlab.com:13513/db-projeto").GetDatabase("db-projeto");
-            SessionRepository = new SessionRepository(_database);
+            //SessionRepository = new SessionRepository(_database);
         }
 
         [TestInitialize]
@@ -27,7 +27,7 @@ namespace Management.Test.Repositories
         {
             session = new Session
             {
-                Id = ObjectId.GenerateNewId(),
+                //Id = ObjectId.GenerateNewId(),
                 Date = DateTime.Now,
                 Type = "3D",
                 CopyType = "Dublado",

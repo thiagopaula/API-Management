@@ -8,6 +8,7 @@ namespace API_Management.AppConfig
         {
             //TODO: log aqui
 
+
         }
     }
 }

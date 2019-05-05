@@ -9,15 +9,20 @@ namespace MongoDB.Repositories
 {
     public class SessionRepository : AbstractRepository<Session>, ISessionRepository
     {
-        public SessionRepository([Inject()]IMongoDatabase _database) : base(_database, "sessions") { }
+        public SessionRepository([Inject()]IMongoContext _database ) : base(_database/*, "sessions"*/) { }
 
-        public async Task Create(Session session)
-        {
-            if (session.Id == null)
-            {
-                session.Id = ObjectId.GenerateNewId();
-            }
-            await Collection.InsertOneAsync(session);
-        }
+
+        //public SessionRepository()
+        //{
+
+        //}
+        //public async Task Create(Session session)
+        //{
+        //    if (session.Id == null)
+        //    {
+        //        session.Id = ObjectId.GenerateNewId();
+        //    }
+        //    await Collection.InsertOneAsync(session);
+        //}
     }
 }

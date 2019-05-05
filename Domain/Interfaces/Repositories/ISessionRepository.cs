@@ -5,6 +5,6 @@ namespace Domain.Interfaces.Repositories
 {
     public interface ISessionRepository : IRepository<Session>
     {
-        Task Create(Session session);
+        //Task Create(Session session);
     }
 }

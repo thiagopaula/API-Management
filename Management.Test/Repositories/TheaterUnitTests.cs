@@ -18,7 +18,7 @@ namespace Management.Test.Repositories
         public TheaterUnitTests()
         {
             _database = new MongoClient("mongodb://thiago:82585632A@ds213513.mlab.com:13513/db-projeto").GetDatabase("db-projeto");
-            TheaterRepository = new TheaterRepository(_database);
+            //TheaterRepository = new TheaterRepository(_database);
         }
 
         [TestInitialize]
@@ -26,7 +26,7 @@ namespace Management.Test.Repositories
         {
             theater = new Theater
             {
-                Id = ObjectId.GenerateNewId(),
+               // Id = ObjectId.GenerateNewId(),
                 Name = "Teste 1",
                 CNPJ = "454212457676577",
                 Street = "Rua A",
