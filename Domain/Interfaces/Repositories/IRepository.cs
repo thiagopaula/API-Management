@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.Repositories
 {
-    public interface IRepository<T>
+    public interface IRepository<T> where T : class
     {
         Task Create(T model);
         Task<T> GetAsync(string id);
